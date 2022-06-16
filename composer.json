@@ -1,0 +1,8 @@
+{
+  "name": "eamiral/api-payeer",
+  "description": "A short description of what your package does",
+  "require": {
+    "guzzlehttp/guzzle": "^7.0",
+    "ext-curl": "*"
+  }
+}
