@@ -8,6 +8,13 @@ class Request
 {
     protected ?Client $client = null;
 
+    /**
+     * @param string $method
+     * @param string $uri
+     * @param array $data
+     * @param array $headers
+     * @param $callback
+     */
     public function request(
         string $method,
         string $uri,
@@ -40,70 +47,4 @@ class Request
 
         return $this->client;
     }
-
-    /**
-    public function Info()
-    {
-        $res = $this->Request(array(
-            'method' => 'info',
-        ));
-
-        return $res;
-    }
-
-
-    public function Orders($pair = 'BTC_USDT')
-    {
-        $res = $this->Request(array(
-            'method' => 'orders',
-            'post' => array(
-                'pair' => $pair,
-            ),
-        ));
-
-        return $res['pairs'];
-    }
-
-
-    public function Account()
-    {
-        $res = $this->Request(array(
-            'method' => 'account',
-        ));
-
-        return $res['balances'];
-    }
-
-
-    public function OrderCreate($req = array())
-    {
-        $res = $this->Request(array(
-            'method' => 'order_create',
-            'post' => $req,
-        ));
-
-        return $res;
-    }
-
-
-    public function OrderStatus($req = array())
-    {
-        $res = $this->Request(array(
-            'method' => 'order_status',
-            'post' => $req,
-        ));
-
-        return $res['order'];
-    }
-
-
-    public function MyOrders($req = array())
-    {
-        $res = $this->Request(array(
-            'method' => 'my_orders',
-            'post' => $req,
-        ));
-
-        return $res['items'];
-    }*/
 }

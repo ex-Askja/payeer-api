@@ -7,7 +7,7 @@ class ApiClient
     private ?Request $request = null;
     private string $baseUri = 'https://payeer.com/api/trade/';
     private string $apiId = '1681441954';
-    private string $secretKey = @"TMQ9NmwhOn87lc8y";
+    private string $secretKey = "TMQ9NmwhOn87lc8y";
 
     /**
      * @param string $method
