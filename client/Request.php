@@ -1,6 +1,9 @@
 <?php
 
+namespace client;
+
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
 use Psr\Http\Message\ResponseInterface;
 
@@ -13,27 +16,21 @@ class Request
      * @param string $uri
      * @param array $data
      * @param array $headers
-     * @param $callback
+     * @return ResponseInterface|null
+     * @throws GuzzleException
      */
     public function request(
         string $method,
         string $uri,
         array $data = [],
-        array $headers = [],
-        $callback = null): void
+        array $headers = []): ?ResponseInterface
     {
-        $promise = $this->getClient()->requestAsync($method, $uri, [
-            'body' => $data,
+        return $this?->getClient()?->request($method, $uri, [
+            'json' => $data,
             'headers' => $headers,
+            'http_errors' => true,
+            'verify' => false,
         ]);
-
-        $promise->then(
-            fn(ResponseInterface $response) => $callback($response),
-            function (RequestException $e) {
-                echo $e->getMessage() . "\n";
-                echo $e->getRequest()->getMethod();
-            }
-        );
     }
 
     /**

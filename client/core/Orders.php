@@ -1,5 +1,11 @@
 <?php
 
+namespace client\core;
+
+use client\ApiClient;
+use GuzzleHttp\Exception\GuzzleException;
+use models\Response;
+
 class Orders
 {
     private ?ApiClient $client = null;
@@ -7,6 +13,7 @@ class Orders
     /**
      * @param array $post
      * @return Response|null
+     * @throws GuzzleException
      */
     public function create(array $post = []): ?Response
     {
@@ -19,6 +26,7 @@ class Orders
     /**
      * @param array $post
      * @return Response|null
+     * @throws GuzzleException
      */
     public function status(array $post = []): ?Response
     {
@@ -31,6 +39,7 @@ class Orders
     /**
      * @param array $post
      * @return Response|null
+     * @throws GuzzleException
      */
     public function getAll(array $post = []): ?Response
     {
@@ -43,6 +52,7 @@ class Orders
     /**
      * @param array $post
      * @return Response|null
+     * @throws GuzzleException
      */
     public function get(array $post = []): ?Response
     {

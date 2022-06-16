@@ -1,6 +1,12 @@
 <?php
 
+namespace client;
+
+use Exception;
+use GuzzleHttp\Exception\BadResponseException;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
+use models\Response;
 
 class ApiClient
 {
@@ -13,32 +19,31 @@ class ApiClient
      * @param string $method
      * @param array $additionalData
      * @return Response|null
+     * @throws GuzzleException
+     * @throws Exception
      */
     public function sendRequest(string $method, array $additionalData = []): ?Response
     {
         $response = null;
 
-        $this?->getRequest()?->request(
+        $request = $this?->getRequest()?->request(
             'POST',
-            $this->getBaseUri(),
+            $this->getBaseUri() . $method,
             array_merge([
-                'method' => $method,
                 'ts' => round(microtime(true) * 1000),
             ], $additionalData),
             [
                 'API-ID' => $this->getApiId(),
                 'API-SIGN' => $this->makeSign($method, $additionalData),
-            ], function($result) use(&$response) {
-                if ($result->getStatusCode() >= 200 && $result->getStatusCode() <= 299) {
-                    $response = new Response(
-                        $result->getStatusCode(),
-                        $result->getBody()
-                    );
-                } else {
-                    throw new RequestException("Bad http code", $result);
-                }
-            }
+            ]
         );
+
+        if ($request->getStatusCode() >= 200 && $request->getStatusCode() <= 299) {
+            $response = new Response(
+                $request->getStatusCode(),
+                $request->getBody()
+            );
+        }
 
         return $response;
     }
@@ -59,7 +64,7 @@ class ApiClient
     public function getRequest(): ?Request
     {
         if ($this->request === null) {
-            $this->request = new Request('GET', '');
+            $this->request = new Request();
         }
 
         return $this->request;

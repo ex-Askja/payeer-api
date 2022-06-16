@@ -1,5 +1,11 @@
 <?php
 
+namespace client\core;
+
+use client\ApiClient;
+use GuzzleHttp\Exception\GuzzleException;
+use models\Response;
+
 class Account
 {
     private ?ApiClient $client = null;
@@ -7,6 +13,7 @@ class Account
     /**
      * @param array $post
      * @return Response|null
+     * @throws GuzzleException
      */
     public function get(array $post = []): ?Response
     {
@@ -19,6 +26,7 @@ class Account
     /**
      * @param array $post
      * @return array
+     * @throws GuzzleException
      */
     public function getBalances(array $post = []): array
     {

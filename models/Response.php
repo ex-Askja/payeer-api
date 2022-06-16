@@ -1,5 +1,7 @@
 <?php
 
+namespace models;
+
 class Response
 {
     public array|bool $errorData = false;
