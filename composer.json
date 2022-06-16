@@ -1,8 +1,14 @@
 {
   "name": "eamiral/api-payeer",
-  "description": "A short description of what your package does",
+  "description": "Template API class for payeer",
   "require": {
     "guzzlehttp/guzzle": "^7.0",
     "ext-curl": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "client\\": "client",
+      "models\\": "models"
+    }
   }
 }
