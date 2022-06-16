@@ -3,6 +3,7 @@
   "description": "Template API class for payeer",
   "require": {
     "guzzlehttp/guzzle": "^7.0",
+    "phpunit/phpunit": "^9",
     "ext-curl": "*"
   },
   "autoload": {

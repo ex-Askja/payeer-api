@@ -3,9 +3,7 @@
 namespace client;
 
 use Exception;
-use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\Exception\GuzzleException;
-use GuzzleHttp\Exception\RequestException;
 use models\Response;
 
 class ApiClient
@@ -26,15 +24,17 @@ class ApiClient
     {
         $response = null;
 
+        $post = array_merge([
+            'ts' => round(microtime(true) * 1000),
+        ], $additionalData);
+
         $request = $this?->getRequest()?->request(
             'POST',
             $this->getBaseUri() . $method,
-            array_merge([
-                'ts' => round(microtime(true) * 1000),
-            ], $additionalData),
+            $post,
             [
                 'API-ID' => $this->getApiId(),
-                'API-SIGN' => $this->makeSign($method, $additionalData),
+                'API-SIGN' => $this->makeSign($method, $post),
             ]
         );
 

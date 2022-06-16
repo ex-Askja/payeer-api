@@ -2,14 +2,12 @@
 
 namespace client\core;
 
-use client\ApiClient;
+use client\BaseApiRequest;
 use GuzzleHttp\Exception\GuzzleException;
 use models\Response;
 
-class Orders
+class Orders extends BaseApiRequest
 {
-    private ?ApiClient $client = null;
-
     /**
      * @param array $post
      * @return Response|null
@@ -60,17 +58,5 @@ class Orders
             'my_orders',
             $post,
         );
-    }
-
-    /**
-     * @return ApiClient|null
-     */
-    private function getClient(): ?ApiClient
-    {
-        if ($this->client === null) {
-            $this->client = new ApiClient();
-        }
-
-        return $this->client;
     }
 }

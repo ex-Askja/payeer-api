@@ -12,7 +12,6 @@ ini_set("memory_limit", PHP_INT_MAX . 'MB');
 error_reporting(E_ALL);
 
 $orders = new Orders();
-$account = new Account();
 
 try {
     print_r($orders->getAll([
@@ -21,11 +20,5 @@ try {
 } catch (GuzzleException $e) {
     print_r($e);
 }
-try {
-    print_r($account->get());
-} catch (GuzzleException $e) {
-    print_r($e);
-}
-
 ?>
 </pre>
