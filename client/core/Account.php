@@ -17,6 +17,21 @@ class Account
     }
 
     /**
+     * @param array $post
+     * @return array
+     */
+    public function getBalances(array $post = []): array
+    {
+        $request = $this->get($post);
+
+        if ($request->isSuccess()) {
+            return $request->body['balances'];
+        }
+
+        return [];
+    }
+
+    /**
      * @return ApiClient|null
      */
     private function getClient(): ?ApiClient
